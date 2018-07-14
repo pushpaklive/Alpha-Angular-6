@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
+import { User } from '../user';
 
 @Component({
   selector: 'dashboard',
@@ -7,12 +8,18 @@ import { CommonService } from '../common.service';
 })
 export class DashboardComponent implements OnInit { 
    
-    users = {};
+    allUsers:Object;
     constructor(private commonService: CommonService){
-  
+   
     }
   
     ngOnInit(){
-        this.commonService.castUserAsObs.subscribe(users => this.users = users);
-    }  
+        this.commonService.getUsers()
+           .subscribe(users => {
+               //this.allUsers = users;
+               
+               this.allUsers = users;
+               console.log("allUsers : "+this.allUsers);
+           })
+        }  
 }

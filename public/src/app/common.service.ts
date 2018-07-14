@@ -26,6 +26,11 @@ export class CommonService {
        return this.http.post<any>(this._baseUrl,user)
                     .pipe(catchError(this.errorHandler));
   }
+
+  getUsers(){
+    return this.http.get('http://localhost:3000/users')
+                  .pipe(catchError(this.errorHandler));
+  }
   
   errorHandler(err: HttpErrorResponse){
     return throwError(err)
