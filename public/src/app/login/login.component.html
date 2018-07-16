@@ -1,17 +1,18 @@
 <div class="card">
+ </div>   
 
-    </div>
-    
     <div class="card">
     
-        <div class="card-header">ALPHA BEAST 1.0.0</div>
+        <div class="card-header">ALPHA BEAST 1.0.0 
+            <button type="button" class="btn btn-primary" routerLink="/register">Register</button>
+        </div>
         <div class="alert alert-danger" *ngIf="errorMsg">
             {{errorMsg}}
         </div>
         <div class="card-body">
         <div class="container text-center">
             <form #loginForm="ngForm" class="form-signin"
-                 (ngSubmit)="authenticateUser()"
+                 (ngSubmit)="loginUser()"
                  *ngIf="!submitted" novalidate >
                 <img class="mb-10" src="../assets/beast.jpg" alt="Alpha" width="150" height="150">
                 <h1 class="h3 mb-3 ">Sign in</h1>

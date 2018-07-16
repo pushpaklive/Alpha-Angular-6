@@ -27,6 +27,16 @@ export class CommonService {
                     .pipe(catchError(this.errorHandler));
   }
 
+  loginUser<User>(user: User){
+    return this.http.post("http://localhost:3000/user", user)
+                    .pipe(catchError(this.errorHandler));
+  }
+
+
+  isLoggedInAllowed(){
+    return false;
+  }
+
   getUsers(){
     return this.http.get('http://localhost:3000/users')
                   .pipe(catchError(this.errorHandler));
@@ -36,5 +46,9 @@ export class CommonService {
     return throwError(err)
   }
   
+  getMessages(){
+    return this.http.get("http://localhost:3000/messages")
+    .pipe(catchError(this.errorHandler));
+  }
 
 }

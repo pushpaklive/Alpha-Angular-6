@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../common.service';
 import { User } from '../user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard',
@@ -9,7 +10,7 @@ import { User } from '../user';
 export class DashboardComponent implements OnInit { 
    
     allUsers:Object;
-    constructor(private commonService: CommonService){
+    constructor(private commonService: CommonService, private router: Router){
    
     }
   
@@ -21,5 +22,10 @@ export class DashboardComponent implements OnInit {
                this.allUsers = users;
                console.log("allUsers : "+this.allUsers);
            })
-        }  
+        }
+        
+    onSelect(user) {
+        console.log("selected user id : ",user._id)
+        this.router.navigate(['/user',user._id])
+    }     
 }

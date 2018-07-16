@@ -1,0 +1,56 @@
+<div class="card">
+  </div>   
+ 
+     <div class="card">
+     
+         <div class="card-header">ALPHA BEAST 1.0.0</div>
+         <div class="alert alert-danger" *ngIf="errorMsg">
+             {{errorMsg}}
+         </div>
+         <div class="card-body">
+         <div class="container text-center">
+             <form #loginForm="ngForm" class="form-signin"
+                  (ngSubmit)="authenticateUser()"
+                  *ngIf="!submitted" novalidate >
+                 <img class="mb-10" src="../assets/beast.jpg" alt="Alpha" width="150" height="150">
+                 <h1 class="h3 mb-3 ">Register</h1>
+                 <label for="inputEmail" class="sr-only">Email address</label>
+                 <input type="email"
+                         [class.is-invalid]="email.invalid && email.touched"
+                         name="email"
+                         #email="ngModel"
+                         id="inputEmail"
+                         [(ngModel)]="userModel.email"
+                         class="form-control"
+                         placeholder="Email address"
+                         required 
+                         autofocus>
+                         <small [class.d-none]="email.valid || email.untouched" class="text-danger">Name is required</small>
+                 <hr>
+                 <label for="inputPassword" class="sr-only">Password</label>
+                 <input type="password"
+                        name="password"
+                         id="inputPassword" 
+                         #password="ngModel"
+                         [class.is-invalid]="password.is-invalid && password.touched"
+                         [(ngModel)]="userModel.password"
+                         class="form-control" 
+                         placeholder="Password" 
+                         required
+                         minlength="8">
+                         <small [class.d-none]="password.valid || password.minlength == 8" class="text-danger">Password length should be more than 8 digits</small>
+                         <br>
+ 
+                 <p>
+                     <button type="submit" class="btn btn-sm btn-primary" [disabled]="!loginForm.valid">Submit</button>
+                 </p> 
+                 <p class="text-success"> {{userModel | json}}
+                     {{loginForm.valid}}</p>          
+                 <p class="mt-5 mb-3 text-muted">&copy; ALPHA 2017-2018</p>
+             </form>
+         </div>
+         </div>
+     
+         <div class="card-footer"></div>
+     
+     </div>

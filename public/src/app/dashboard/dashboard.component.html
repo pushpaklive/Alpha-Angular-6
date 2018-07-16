@@ -3,9 +3,12 @@
     <div class="card-body">
         Dashboard
         <hr>
+        <a type="button" class="btn btn-sm btn-primary" routerLink="/messages">My Messages</a>
+        <hr>
         <div class="container">
+            <strong>Users logged in till now:</strong>
             <ul>
-                <li *ngFor="let user of allUsers">
+                <li (click)="onSelect(user)" *ngFor="let user of allUsers">
                     <a>{{user.email}}</a>
                 </li>
             </ul>           
