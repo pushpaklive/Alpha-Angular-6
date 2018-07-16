@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-var User = require('./models/user')
+var User = require('./models/user');
+var Messages = require('./models/message')
 
 //var router = express.Router();
 //Import the mongoose module
@@ -37,8 +38,7 @@ app.get('/users', function(req, res){
     User.find()
     .then(users => {
         let userArr = [];
-        console.log("users details that are recieved : "+users);
-       
+        console.log("users details that are recieved : "+users);       
 
         users.forEach(user => {
             userArr.push(user);
@@ -47,6 +47,65 @@ app.get('/users', function(req, res){
     })
     .catch(err => {
     res.status(400).send("unable to save user to the database");
+    });
+})
+
+app.post('/user', function(req, res){
+   
+    //var user = new User(req.body);
+    User.findOne({email: req.body.email})
+    .then(user => {
+        if(user){
+        console.log("single user detail that is recieved : "+user);
+        res.status(200).send(user);
+        }
+        else{
+        res.status(400).send("Error in login")
+        }
+        
+    })
+    .catch(err => {
+    res.status(400).send("unable to save user to the database");
+    });
+})
+
+app.post('/user/id', function(req, res){
+   
+    //var user = new User(req.body);
+    console.log("req : ",req._id);
+    User.findOne({_id: "5b4c93b5f043ae0e68b9cec5"})
+    .then(user => {
+        if(user){
+        console.log("5b4c93b5f043ae0e68b9cec5 user detail that is recieved : "+user);
+        res.status(200).send(user);
+        }
+        else{
+        res.status(400).send("5b4c93b5f043ae0e68b9cec5 Error in login")
+        }
+        
+    })
+    .catch(err => {
+    res.status(400).send("unable to save user to the database");
+    });
+})
+
+app.get('/messages', function(req, res){
+   
+    //var user = new User(req.body);
+    Messages.find()
+    .then(messages => {
+        /*let messagesArr = [];
+       
+       
+
+        messages.forEach(message => {
+            messagesArr.push(message);
+        });*/
+        console.log("messages that are recieved : "+messages);
+        res.status(200).send(messages);
+    })
+    .catch(err => {
+    res.status(400).send("unable to fetch messages from the database",err);
     });
 })
 
